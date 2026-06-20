@@ -13,9 +13,9 @@ async function bootstrap() {
     .setDescription('The API description details')
     .setVersion('1.0')
     .addTag('auth')
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+    .build()
+  const document = SwaggerModule.createDocument(app, config)
+  SwaggerModule.setup('api', app, document)
 
   await app.listen(process.env.PORT ?? 3000)
 }
