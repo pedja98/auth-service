@@ -1,0 +1,81 @@
+{
+  "openapi": "3.2.0",
+  "servers": [{ "url": "http://localhost:3002", "description": "Local Server" }],
+  "info": { "version": "0.0.1", "title": "auth-service", "description": "", "license": { "name": "UNLICENSED" } },
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/RegisterDto" } } },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": { "message": { "type": "string" } },
+                  "required": ["message"]
+                }
+              }
+            }
+          }
+        },
+        "x-samchon-accessor": ["auth", "register"],
+        "x-samchon-controller": "AuthController"
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/LoginDto" } } },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": { "accessToken": { "type": "string" } },
+                  "required": ["accessToken"]
+                }
+              }
+            }
+          }
+        },
+        "x-samchon-accessor": ["auth", "login"],
+        "x-samchon-controller": "AuthController"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RegisterDto": {
+        "type": "object",
+        "properties": {
+          "firstName": { "type": "string" },
+          "lastName": { "type": "string" },
+          "email": { "type": "string" },
+          "password": { "type": "string" },
+          "role": { "oneOf": [{ "const": "admin" }, { "const": "user" }] }
+        },
+        "required": ["firstName", "lastName", "email", "password"]
+      },
+      "LoginDto": {
+        "type": "object",
+        "properties": { "email": { "type": "string" }, "password": { "type": "string" } },
+        "required": ["email", "password"]
+      }
+    }
+  },
+  "tags": [],
+  "x-typia-emended-v12": true
+}
